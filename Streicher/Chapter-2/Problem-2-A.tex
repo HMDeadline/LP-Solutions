@@ -1,0 +1,32 @@
+    We prove this by induction on the structure of the derivation.
+
+    \textbf{Base cases.}
+    \begin{itemize}
+        \item By the rules of the BigStep semantics for PCF, the lemma for the following base cases is trivial:
+            \begin{itemize}
+                \item $M \equiv x$, then $x \Downarrow x$. So $V$ and $W$ can only be $x$; thus, $V \equiv W \equiv x$.
+                \item $M \equiv \lambda x:\sigma.M$, then $\lambda x:\sigma.M \Downarrow \lambda x:\sigma.M$.
+                \item $M \equiv \underline{0}$, then $\underline{0} \Downarrow \underline{0}$.
+            \end{itemize}
+    \end{itemize}
+    \textbf{Inductive Steps.}
+    \begin{itemize}
+        \item If $M \equiv succ(M)$, then it must be derived by the rule $\frac{M \Downarrow \underline{n}}{succ(M) \Downarrow \underline{n+1}}$.
+              Then we would have $V \equiv \underline{n+1}$ and $W \equiv \underline{m+1}$ since the successor rule is the only way to derive $succ(M)$.
+              By IH, we know that $\underline{n} = \underline{m}$, thus $\underline{n+1} = \underline{m+1}$, and hence $V = W$.
+        
+        \item If $M \equiv M(N)$. The derivation for $M(N)$ must be of the form $\frac{M \Downarrow \lambda x:\sigma.E \;\; E[N/x] \Downarrow V}{M(N) \Downarrow V}$.
+              A second derivation for $M(N)$ must use the same rule. i.e., $\frac{M \Downarrow \lambda x:\sigma'.E' \;\; E'[N/x] \Downarrow W}{M(N) \Downarrow W}$.
+              But then by IH, we would have $\lambda x:\sigma.E \equiv \lambda x:\sigma'.E'$. So $\sigma \equiv \sigma'$ and $E = E'$. Now, we have $E[N/x] \Downarrow V$ and $E[N/x] \Downarrow W$.
+              By the IH on the sub-derivation for $E[N/x]$, we conclude $V \equiv W$.
+        \item If $M \equiv pred(M)$, then the rules are $\frac{M \Downarrow \underline{0}}{pred(M) \Downarrow \underline{0}}$ and $\frac{M \Downarrow \underline{n+1}}{pred(M) \Downarrow \underline{n}}$.
+              For the derivation $pred(M) \Downarrow V$, we must have a sub-derivation for $M \Downarrow \underline{x}$ for some numeral $\underline{x}$.
+              Similarly, for $pred(M) \Downarrow W$, we must have a sub-derivation for $M \Downarrow \underline{y}$ for some numeral $\underline{y}$. 
+              By the IH on the sub-derivation for $M$, we can conclude that $\underline{x} \equiv \underline{y} \equiv k$.
+              
+              Let's examine $k$.
+              If $k \equiv \underline{0}$, then both derivations must be $\frac{M \Downarrow \underline{0}}{pred(M) \Downarrow \underline{0}}$. Thus, $V \equiv W \equiv \underline{0}$.
+              Same argument is valid for the case $k \equiv \underline{n+1}$.
+
+        \item The other cases ($Y_\sigma$, and both cases of $ifz$) can be proved likewise.
+    \end{itemize}
