@@ -1,0 +1,61 @@
+\usepackage[a4paper, total={6.5in, 10in}]{geometry}
+\usepackage{amsthm, amsmath, amssymb, mathrsfs}
+\usepackage{enumitem, tikz-cd, graphicx, xcolor}
+\usepackage{tocloft, titletoc, titlesec, fancyhdr}
+\usepackage{mlmodern}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+\newcommand*{\maximumNumberOfQuestions}{200}
+
+
+\newlistof{exn}{exn}{}
+\theoremstyle{definition}
+\newtheorem{exc}[exn]{Problem}
+\newcommand{\exn}[1]{\setcounter{exn}{#1}\addtocounter{exn}{-1}\exc%
+\addcontentsline{exn}{exn}{\protect\numberline{}#1}%
+}
+\counterwithin*{equation}{exn}
+\counterwithin*{exn}{section}
+\counterwithin*{exn}{subsection}
+
+\titlecontents*{exn}[0pt]{}{}{}{%
+%TODO status
+}[\quad][]
+
+\setlist[enumerate,1]{label={($\roman*$):}}
+
+\makeatletter
+\newcommand{\inlineitem}[1][]{%
+\ifnum\enit@type=\tw@
+    {\descriptionlabel{#1}}
+  \hspace{\labelsep}%
+\else
+  \ifnum\enit@type=\z@
+       \refstepcounter{\@listctr}\fi
+    \quad\@itemlabel\hspace{\labelsep}%
+\fi}
+\makeatother
+\parindent=0pt
+
+
+\usepackage{versions}
+\excludeversion{ans}
+
+\makeatletter
+\providecommand*{\sledom}{%
+  \mathrel{%
+    \mathpalette\@sledom\models
+  }%
+}
+\newcommand*{\@sledom}[2]{%
+  \reflectbox{$\m@th#1#2$}%
+}
+\makeatother
+
+\renewcommand\beginmarkversion{\\\textbf{Solution: }}
+\renewcommand\endmarkversion{}
+
+\titleformat{\section}
+{\Large\normalfont\bfseries}
+{Chapter\ \thesection.}{0.3em}{}
+\setlength{\headheight}{14.49998pt}

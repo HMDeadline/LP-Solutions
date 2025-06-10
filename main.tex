@@ -1,0 +1,59 @@
+\documentclass[a4paper,12pt]{article}
+\input{preamble}
+
+% \pagecolor{black!92}
+% \color[rgb]{0.8,0.8,0.8}
+
+\markversion{ans}
+
+\begin{document}
+\renewcommand*\contentsname{\LARGE Table of Contents\vspace*{2cm}}
+\tableofcontents\normalsize
+\newpage
+\fancyhf{}
+\fancyhead[L]{Defamation of Barendregt}
+\fancyhead[R]{Exercises}
+\fancyfoot[C]{\thepage}
+\vspace{0.5cm}
+\section{Solutions to \it{Lambda Calculi with Types}}
+\foreach \c in {{3.1.13},{4.1.20},{4.2.8},{5.1.16}}{%
+    \IfFileExists{Barendregt/Ex-\c.tex} {%
+        \exc \label{\c-Problem} \input{Barendregt/Ex-\c.tex}%
+        \IfFileExists{Barendregt/Ex-\c-A.tex}{
+            \quad%
+            \begin{ans}%
+                \input{Barendregt/Ex-\c-A.tex}%
+            \end{ans}%
+            \hfill$\blacksquare$%
+        }
+        \vspace*{0.3cm}
+        \hrule
+    }%
+}%
+\hrule\hrule\newpage
+\section{Solutions to \it{Domain-Theoretic Foundations of Functional Programming}}
+\foreach \c\t in {2/{PCF and its Operational Semantics},3/{The Scott Model of PCF},5/{Milner's Context Lemma},7/{Logical Relations}}{%
+    \subsection{\t}
+    \fancyhf{}
+    \fancyhead[L]{Defamation of Streicher}
+    \fancyhead[R]{\t}
+    \fancyfoot[C]{\thepage}
+    \vspace{0.5cm}
+    \foreach \n in {1,2,...,6}{%
+        \IfFileExists{Streicher/Chapter-\c/Problem-\n.tex} {%
+            \exc \label{\c-Problem-\n} \input{Streicher/Chapter-\c/Problem-\n.tex}%
+            \IfFileExists{Streicher/Chapter-\c/Problem-\n-A.tex}{
+            \quad%
+            \begin{ans}%
+                \input{Streicher/Chapter-\c/Problem-\n-A.tex}%
+            \end{ans}%
+            \hfill$\blacksquare$%
+            }
+            \vspace*{0.3cm}
+            \hrule
+        }%
+    }%
+    \hrule\newpage
+}%
+
+\end{document}
