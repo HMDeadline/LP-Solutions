@@ -18,14 +18,14 @@
 \section{Solutions to \it{Lambda Calculi with Types}}
 \foreach \c in {{3.1.13},{4.1.20},{4.2.8},{5.1.16}}{%
     \IfFileExists{Barendregt/Ex-\c.tex} {%
-        \exc \label{\c-Problem} \input{Barendregt/Ex-\c.tex}%
+        \exc \label{\c-Problem} \input{Barendregt/Ex-\c.tex} \\
         \IfFileExists{Barendregt/Ex-\c-A.tex}{
             \quad%
             \begin{ans}%
                 \input{Barendregt/Ex-\c-A.tex}%
             \end{ans}%
             \hfill$\blacksquare$%
-        }
+        } \\
         \vspace*{0.3cm}
         \hrule
     }%
@@ -41,14 +41,14 @@
     \vspace{0.5cm}
     \foreach \n in {1,2,...,6}{%
         \IfFileExists{Streicher/Chapter-\c/Problem-\n.tex} {%
-            \exc \label{\c-Problem-\n} \input{Streicher/Chapter-\c/Problem-\n.tex}%
+            \exc \label{\c-Problem-\n} \input{Streicher/Chapter-\c/Problem-\n.tex} \\
             \IfFileExists{Streicher/Chapter-\c/Problem-\n-A.tex}{
             \quad%
             \begin{ans}%
                 \input{Streicher/Chapter-\c/Problem-\n-A.tex}%
             \end{ans}%
             \hfill$\blacksquare$%
-            }
+            } \\
             \vspace*{0.3cm}
             \hrule
         }%
