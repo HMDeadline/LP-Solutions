@@ -1,1 +1,53 @@
-*Solution!*
+
+	\begin{enumerate}[label = \Roman*)]
+		\item 
+			\begin{enumerate}
+				\item 
+				we insert all the variables into the context at once, hence by putting
+				\linebreak
+				$
+					\Gamma := x : \sigma \rightarrow \tau \rightarrow \rho, \; y : \sigma \rightarrow \tau, \; z : \sigma
+				$ then we have : 
+				\newline\newline
+					\begin{prooftree}
+						\hypo{\Gamma \vdash x : \sigma \rightarrow \tau \rightarrow \rho}
+						\hypo{\Gamma \vdash z : \sigma}
+						\infer2{\Gamma \vdash xz : \tau \rightarrow \rho}
+						\hypo{\Gamma \vdash y : \sigma \rightarrow \tau}
+						\hypo{\Gamma \vdash z : \sigma}
+						\infer2{\Gamma \vdash yz : \tau}
+						\infer2{\Gamma \vdash xz(yz) : \rho}
+						\infer1{\vdash \lambda xyz.xz(yz) : (\sigma \rightarrow \tau \rightarrow \rho)\rightarrow (\sigma \rightarrow \tau) \rightarrow (\sigma \rightarrow \rho)}
+					\end{prooftree}
+					\item 
+					We know that K : $\sigma \rightarrow \tau \rightarrow \sigma$ and also in the part (a) we proved that for all $\sigma, \tau, \rho, \in \mathbb{T}$ we have S : $(\sigma \rightarrow \tau \rightarrow \rho)\rightarrow (\sigma \rightarrow \tau) \rightarrow (\sigma \rightarrow \rho)$, hence we can say S : $(\sigma \rightarrow \tau \rightarrow \sigma)\rightarrow (\sigma \rightarrow \tau) \rightarrow (\sigma \rightarrow \sigma)$ or simply just put $\rho = \sigma$. So we have
+					\\\\
+					\begin{prooftree}
+						\hypo{\vdash S : (\sigma \rightarrow \tau \rightarrow \sigma)\rightarrow (\sigma \rightarrow \tau) \rightarrow (\sigma \rightarrow \sigma)}
+						\hypo{\vdash K : \sigma \rightarrow \tau \rightarrow \sigma}
+						\infer2{\vdash SK : (\sigma \rightarrow \tau) \rightarrow \sigma \rightarrow \sigma}
+					\end{prooftree}
+					\item 
+					One can easily show that K : $(\sigma \rightarrow \sigma)\rightarrow \tau \rightarrow (\sigma \rightarrow \sigma)$
+					since we have K : $\sigma \rightarrow \tau \rightarrow \sigma$ for every $\sigma$ and $\tau$. And I : $\sigma \rightarrow \sigma$, so we have : 
+					\\\\
+					\begin{prooftree}
+						\hypo{\vdash K : (\sigma \rightarrow \sigma)\rightarrow \tau \rightarrow (\sigma \rightarrow \sigma)}
+						\hypo{\vdash I : \sigma \rightarrow \sigma}
+						\infer2{\vdash KI : \tau \rightarrow \sigma \rightarrow \sigma}
+					\end{prooftree}
+			\end{enumerate}
+			\item 
+			From proposition 3.1.9 we know that every subterm of a typeable term is typeable since yz is a subterm of SK, it should be typeable. Suppose z : $\sigma$ for some $\sigma \in \mathbb{T}$
+			since y is applied on z then y should be of type $\sigma \rightarrow \tau$ for some type $\tau$.
+				From proposition 3.1.11 we also know that for all terms M and N if we have  M $\twoheadrightarrow_{\beta}$ N and $\vdash M : \sigma$ then we have 
+				$\vdash N : \sigma$ as well. Suppose we have SK : $\tau \rightarrow \sigma \rightarrow \sigma$.
+				\\
+				SK = $(\lambda xyz.xz(yz))(\lambda ab.a) = \lambda yz.(\lambda ab.a)z(yz) = \lambda yz.z$ . So $\lambda yz.z : \tau \rightarrow \sigma \rightarrow \sigma$ so we must have y : $\tau$ but this is a contradiction. So $\not \vdash$ SK : $\tau \rightarrow \sigma \rightarrow \sigma$.
+			\item 
+			Suppose $\lambda x.xx : \sigma$ for some type $\sigma$ and x is of type $\tau$ for some $\tau$. Then by inversion of typing rules we must have 
+			$$ \lambda x.xx : \sigma \Rightarrow x : \tau \vdash xx : \sigma \Rightarrow x : \tau \vdash x : \tau \rightarrow \sigma$$
+			which is infeasible.
+			\\
+			Like the part (b) we use the fact that every subterm of a typeable term is typeable, so if KI$\omega$ is typeable then also is $\omega$. But we proved that $\omega$ isn't.  
+			\end{enumerate}
