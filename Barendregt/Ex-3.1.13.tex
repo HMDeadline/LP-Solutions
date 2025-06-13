@@ -1,1 +1,15 @@
-(Exercise 3.1.13) *Exercise Statement*
+(Exercise 3.1.13) 
+let I = $\lambda x.x$, K = $\lambda xy.x$, S = $\lambda xyz.xz(yz)$.
+	\begin{enumerate}[label = \Roman*)]
+		\item 
+			Show for all $\sigma, \tau, \rho, \in \mathbb{T}$ one has : 
+			\begin{enumerate}
+				\item $\vdash$ S : $(\sigma \rightarrow \tau \rightarrow \rho)\rightarrow (\sigma \rightarrow \tau) \rightarrow (\sigma \rightarrow \rho)$
+				\item $\vdash$SK : $(\sigma \rightarrow \tau) \rightarrow \sigma \rightarrow \sigma$
+				\item $\vdash$KI : $\tau \rightarrow \sigma \rightarrow \sigma$
+			\end{enumerate}	
+			\item 
+				Show that $\not \vdash$ SK : $\tau \rightarrow \sigma \rightarrow \sigma$
+			\item 
+				Show that $\omega := \lambda x.xx$ and $KI\omega$ have no types in $\lambda_{\rightarrow}$
+	\end{enumerate}
