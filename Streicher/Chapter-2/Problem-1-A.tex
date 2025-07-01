@@ -1,0 +1,15 @@
+    We prove this by induction on the structure.
+    \begin{itemize}
+        \item if $M \equiv x$ (variable), then it must be by the variable rule: $\Gamma', x:\sigma \Delta' \vdash x:\sigma$; thus $\sigma$ must be unique by the definition of the context $\Gamma$.
+                ($\Gamma \equiv x_1:\sigma_1, ..., x_n:\sigma_n$, where $x_i$ are pairwise distinct variables).
+        
+        \item if $M \equiv Z$ (zero), then it must be derived by the zero rule: $\Gamma \vdash Z:\mathbb{N}$; thus its type is unique.
+        
+        \item if $M \equiv (\lambda x:\sigma.M)$, then it must be derived by the abstraction rule: $\frac{\Gamma, x:\sigma \vdash M:\tau}{\Gamma \vdash (\lambda x:\sigma.M):\sigma \to \tau}$.
+                By IH, $M$ and $x$ have unique types $\tau$ and $\sigma$, respectively. Thus, the type of the abstraction is uniquely determined as $\sigma \to \tau$.
+                
+        \item if $M \equiv (M(N))$, then by the application rule, we would have $\frac{\Gamma \vdash M:\sigma \to \tau \;\; \Gamma \vdash N:\sigma}{\Gamma \vdash M(N) : \tau}$.
+                By IH, $M$ and $N$ have unique types $\sigma \to \tau$ and $\sigma$, respectively. Thus, the type of the application $M(N)$ is uniquely determined as $\tau$.
+
+        \item Same goes for the other cases ($succ$, $pred$, $Y_\sigma$, and $ifz$).
+    \end{itemize}

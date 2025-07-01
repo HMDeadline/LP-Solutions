@@ -1,0 +1,25 @@
+
+\textbf{-Relfexivity.}
+We need to show that for any closed PCF term M of type $\sigma$, $M \sqsubseteq_\sigma M$.
+
+\textbf{Base Case.} For $ M \in Prg_{nat}, M \sqsubseteq_{nat} M $ means that $\forall n \in \mathbb{N}, M \Downarrow \underline{n} \Rightarrow M \Downarrow \underline{n} $. This is trivially true.
+
+\textbf{Inductive Case.} For $ M \in Prg_{\sigma \to \tau}, M \sqsubseteq_{\sigma \to \tau} M $ means that $ \forall P \in Prg_\sigma, M(P) \sqsubseteq_\tau M(P) $, which holds by IH.
+
+\textbf{-Transitivity.} We need to show that for any closed PCF terms $ M, N, K $ of type $\sigma$, if $ M \sqsubseteq_\sigma N $ and $ N \sqsubseteq_\sigma K $, then $ M \sqsubseteq_\sigma K $.
+
+\textbf{Base Case.} For $M, N, K \in Prg_{nat} $, assume $ M \sqsubseteq_{nat} N $ and $ N \sqsubseteq_{nat} K $. Then, by definition, we have the followings:
+
+\begin{itemize}
+    \item $ \forall n \in \mathbb{N}, M \Downarrow \underline{n} \Rightarrow N \Downarrow \underline{n} $
+    \item $ \forall n \in \mathbb{N}, N \Downarrow \underline{n} \Rightarrow K \Downarrow \underline{n} $
+\end{itemize}
+Thus, if $ M \Downarrow \underline{n} $ then $ K \Downarrow \underline{n} $, which means $ M \sqsubseteq_{nat} K $.
+
+\textbf{Inductive Case.} For $ M, N, K \in Prg_{\sigma \to \tau} $, assume $ M \sqsubseteq_{\sigma \to \tau} N $ and $ N \sqsubseteq_{\sigma \to \tau} K $. Then, by definition, we have the followings:
+
+\begin{itemize}
+    \item $ \forall P \in Prg_\sigma, M(P) \sqsubseteq_\tau N(P) $ 
+    \item $ \forall P \in Prg_\sigma, N(P) \sqsubseteq_\tau K(P) $ 
+\end{itemize}
+Thus, we would have $ \forall P \in Prg_\sigma, M(P) \sqsubseteq K(P) $.

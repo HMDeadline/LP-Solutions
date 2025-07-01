@@ -1,0 +1,96 @@
+In order to prove this, we prove the following two lemmas: \\
+
+    \textbf{(a).} if $M \Downarrow V$ then $M \rhd^* V$
+
+    \textbf{(b).} if $M \rhd N$ then for all values $V$, if $N \Downarrow V$, then $M \Downarrow V$. \\
+    
+    Then, applying \textbf{(b)} iteratively, it follows that: \\
+
+    \textbf{(c).} if $M \rhd^* N$ and $N \Downarrow V$, then $M \Downarrow V$.
+
+    and by \textbf{(a)} and \textbf{(c)}, we can conclude that $M \Downarrow V$ iff $M \rhd^* V$. \\
+    \textbf{Proof of (a).} We prove this by induction on the structure of the derivation of $M \Downarrow V$. 
+
+    \textbf{Base cases.}
+    \begin{itemize}
+        \item All the base cases ($M \equiv x$, $M \equiv \lambda x:\sigma.M$, and $M \equiv \underline{0}$) are trivial by the reflexivity of $\rhd^*$.
+    \end{itemize}
+
+    \textbf{Inductive Steps.}
+    \begin{itemize}
+        \item If $M \equiv succ(M)$, then the rule is $\frac{M \Downarrow \underline{n}}{succ(M) \Downarrow \underline{n+1}}$; thus, $V \equiv \underline{n+1}$.
+              By IH on $M \Downarrow \underline{n}$, we have $M \rhd^* \underline{n}$. Now, there are two cases.
+              \begin{itemize}
+                \item If $M \equiv \underline{n}$, then $succ(M) \equiv succ(\underline{n}) \equiv \underline{n+1}$. So $M \rhd^* V$.
+                \item If $M \rhd M_1 \rhd ... \rhd \underline{n}$, then by the congruence rule for $succ$, we would have $succ(M) \rhd succ(M_1) \rhd ... \rhd succ(\underline{n}) \equiv \underline{n+1}$.
+                      So, $succ(M) \rhd^* \underline{n+1} \equiv V$.
+              \end{itemize}
+        
+        \item If $M \equiv M(N)$, then the rule is $\frac{M \Downarrow \lambda x:\sigma.E \quad E[N/x] \Downarrow V}{M(N) \Downarrow V}$. Then, by IH on $M \Downarrow \lambda x:\sigma.E$,
+              we have $M \rhd^* \lambda x:\sigma.E$, and on $E[N/x] \Downarrow V$, we have $E[N/x] \rhd^* V$.
+              
+              If $M \equiv \lambda x:\sigma.E$, then $M(N) \equiv (\lambda x:\sigma.E)(N)$. 
+                By small-step rule $(\lambda x:\sigma.E)(N) \rhd E[N/x]$. Since $E[N'/x] \rhd^* V$, we have $M(N) \rhd E[N/x] \rhd^* V$, so $M(N) \rhd^* V$.
+    
+
+              If $M \rhd M_1 \rhd \dots \rhd \lambda x:\sigma.E$, then by the congruence rule for application $M(N) \rhd M_1(N) \rhd \dots \rhd (\lambda x:\sigma.E)(N)$.
+                Then $(\lambda x:\sigma.E)(N) \rhd E[N/x]$, and $E[N/x] \rhd^* V$.
+                Then we would have: $M(N) \rhd^* (\lambda x:\sigma.E)(N) \rhd E[N/x] \rhd^* V$. So $M(N) \rhd^* V$.
+        
+        \item The other cases are fairly similar to these. 
+    \end{itemize}
+    \textbf{Proof of (b).} We prove this by induction on the structure of the derivation of $M \rhd V$.
+
+    \textbf{Base cases.}
+    \begin{itemize}
+        \item Assume $M \equiv (\lambda x:\sigma.E)(A)$ and $N \equiv E[A/x]$ ($M \rhd N$). Assume also $N \Downarrow V$, i.e., $E[A/x] \Downarrow V$.
+              We know $\lambda x:\sigma.E \Downarrow \lambda x:\sigma.E$.
+              By the rule: $\frac{\lambda x:\sigma.E \Downarrow \lambda x:\sigma.E \quad E[A/x] \Downarrow V}{(\lambda x:\sigma.E)(A) \Downarrow V}$. So $M \Downarrow V$.
+    
+        \item Assume $M \equiv Y_{\sigma}(E)$ and $N \equiv E(Y_{\sigma}(E))$.
+              Assume also $N \Downarrow V$, i.e., $E(Y_{\sigma}(E)) \Downarrow V$.
+              By the fixpoint rule: $\frac{E(Y_{\sigma}(E)) \Downarrow V}{Y_{\sigma}(E) \Downarrow V}$. So $M \Downarrow V$.
+
+        \item Assume $M \equiv pred(\underline{0})$ and $N \equiv \underline{0}$.
+              Assume also $N \Downarrow V$, i.e., $\underline{0} \Downarrow V$. This means $V \equiv \underline{0}$.
+              We need to show $pred(\underline{0}) \Downarrow \underline{0}$. This holds by the rule $\frac{\underline{0} \Downarrow \underline{0}}{pred(\underline{0}) \Downarrow \underline{0}}$.
+
+        \item Assume $M \equiv pred(\underline{k+1})$ and $N \equiv \underline{k}$.
+              Assume also $N \Downarrow V$, i.e., $\underline{k} \Downarrow V$. This means $V \equiv \underline{k}$.
+              We need to show $pred(\underline{k+1}) \Downarrow \underline{k}$. This holds by the rule $\frac{\underline{k+1} \Downarrow \underline{k+1}}{pred(\underline{k+1}) \Downarrow \underline{k}}$.
+
+        \item Assume $M \equiv ifz(\underline{0}, E_1, E_2)$ and $N \equiv E_1$.
+              Assume also $N \Downarrow V$, i.e., $E_1 \Downarrow V$.
+              We need to show $ifz(\underline{0}, E_1, E_2) \Downarrow V$. This holds by the rule $\frac{\underline{0} \Downarrow \underline{0} \quad E_1 \Downarrow V}{ifz(\underline{0}, E_1, E_2) \Downarrow V}$.
+
+        \item Assume $M \equiv ifz(\underline{k+1}, E_1, E_2)$ and $N \equiv E_2$.
+              Assume also $N \Downarrow V$, i.e., $E_2 \Downarrow V$.
+              We need to show $ifz(\underline{k+1}, E_1, E_2) \Downarrow V$. This holds by the rule $\frac{\underline{k+1} \Downarrow \underline{k+1} \quad E_2 \Downarrow V}{ifz(\underline{k+1}, E_1, E_2) \Downarrow V}$.
+    \end{itemize}
+
+    \textbf{Inductive Steps.}
+    \begin{itemize}
+        \item $\frac{M_1 \rhd M_2}{succ(M_1) \rhd succ(M_2)}$: $M = succ(M_1), N = succ(M_2)$, where $M_1 \rhd M_2$. Assume $N \Downarrow V$, i.e., $succ(M_2) \Downarrow V$. 
+              This implies $V \equiv \underline{k+1}$ and $M_2 \Downarrow \underline{k}$ for some $k$.
+              By IH on the sub-derivation $M_1 \triangleright M_2$: since $M_2 \Downarrow \underline{k}$, it follows that $M_1 \Downarrow \underline{k}$.
+              Then, by the rule $\frac{M_1 \Downarrow \underline{k}}{succ(M_1) \Downarrow \underline{k+1}}$.
+              So $M \equiv succ(M_1) \Downarrow \underline{k+1}$. Since $V \equiv \underline{k+1}$, we have $M \Downarrow V$.
+ 
+
+        \item $\frac{M_1 \rhd M_2}{M_1(A) \rhd M_2(A)}$: $M = M_1(A),\ N = M_2(A)$. Assume $M_2(A) \Downarrow V$. 
+              This means $M_2 \Downarrow \lambda x.E$ and $E[A/x] \Downarrow V$. By IH on $M_1 \rhd M_2$, since $M_2 \Downarrow \lambda x.E$, 
+                then $M_1 \Downarrow \lambda x.E$. Thus, by the rule, $M_1(A) \Downarrow V$.
+    
+        \item $\frac{M_1 \rhd M_2}{pred(M_1) \rhd pred(M_2)}$: $M = pred(M_1),\ N = pred(M_2)$. 
+              Assume $pred(M_2) \Downarrow V$. This means $M_2 \Downarrow \underline{k}$ and $V$ is $\underline{0}$ (if $k = 0$) 
+                or $\underline{k-1}$ (if $k > 0$). By IH on $M_1 \rhd M_2$, since $M_2 \Downarrow \underline{k}$, 
+                    then $M_1 \Downarrow \underline{k}$. Thus, by the rule for $pred$, $pred(M_1) \Downarrow V$.
+    
+        \item $\frac{M_1 \rhd M_2}{ifz(M_1, N_1, N_2) \rhd ifz(M_2, N_1, N_2)}$: $M = ifz(M_1, N_1, N_2),\ N = ifz(M_2, N_1, N_2)$. 
+              Assume \\
+              $ifz(M_2, N_1, N_2) \Downarrow V$. This means $M_2 \Downarrow \underline{k}$ and either $N_1 \Downarrow V$ (if $k = 0$) or $N_2 \Downarrow V$ (if $k > 0$). 
+              By IH on $M_1 \rhd M_2$, since $M_2 \Downarrow \underline{k}$, then $M_1 \Downarrow \underline{k}$. 
+              Thus, by the rule for $ifz$, $ifz(M_1, N_1, N_2) \Downarrow V$.
+
+    \end{itemize}
+
