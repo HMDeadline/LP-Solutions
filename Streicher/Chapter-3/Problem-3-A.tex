@@ -1,0 +1,10 @@
+For the first argument, fix $a \in A_1$ and let $F \subseteq [A_1 \to A_2]$ be a directed set of continuous functions. 
+By Theorem 3.5, we have $\bigsqcup F(a) = g(a) = \bigsqcup_{f \in F} f(a)$. Thus,
+$ev(\bigsqcup F, a) = g(a) = \bigsqcup_{f \in F} f(a) = \bigsqcup \{ ev(f,a) | f \in F\} $.
+
+
+Now, for the second argument, fix $f \in [A_1 \to A_2]$ and let $X \subseteq A_1$ be a directed set.
+Because $f$ is continuous, we have $f(\bigsqcup X) = \bigsqcup \{f(x) | x \in X\}$. Thus,
+$$ ev(f, \bigsqcup X) = f(\bigsqcup X) = \bigsqcup \{f(x) | x \in X\} = \bigsqcup \{ ev(f,x) | x \in X \}. $$
+
+Hence, $ev$ is continuous in both arguments and by Lemma 3.4, it is jointly continuous.
