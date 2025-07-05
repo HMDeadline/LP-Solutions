@@ -1,0 +1,5 @@
+$ \llbracket \Gamma \vdash M[N/x] \rrbracket (\vec{d}) = \llbracket \Gamma , x: \sigma \vdash M \rrbracket (\vec{d}, \llbracket \Gamma \vdash N \rrbracket (\vec{d})) $ by Lemma 3.15.
+
+Now, for the other side, 
+$$  \llbracket \Gamma \vdash (\lambda x : \sigma . M)(N) \rrbracket (\vec{d}) = ev(\llbracket \Gamma \vdash \lambda x:\sigma . M \rrbracket (\vec{d}), \llbracket \Gamma \vdash N \rrbracket (\vec{d}))  $$
+$$ \qquad = \llbracket \Gamma \vdash \lambda x:\sigma . M \rrbracket (\vec{d})(\llbracket \Gamma \vdash N \rrbracket (\vec{d})) = \llbracket \Gamma , x:\sigma \vdash M \rrbracket ( \vec{d} , \llbracket \Gamma \vdash N \rrbracket (\vec{d})) $$
