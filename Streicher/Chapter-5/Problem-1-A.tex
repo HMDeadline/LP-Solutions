@@ -1,0 +1,9 @@
+Let $X = \{ (x_k, y_k) | k \in K \}$ be a directed subset of $D_\sigma \times D_\sigma$ such that for all $k \in K, (x_k, y_k) \in \leq_\sigma$.
+This means for each $k \in K$, we have $\forall P \in Prg_\sigma, y_k R_\sigma P \implies x_k R_\sigma P (\star)$.
+
+Let $x = \bigsqcup_{k \in K} x_k$ and $y = \bigsqcup_{k \in K} y_k$ (Note that $\bigsqcup X = (x,y)$). We need to show $x \leq_\sigma y$. That is, $\forall P \in Prg_\sigma y R_\sigma P \implies x R_\sigma P$.
+
+Let $P \in Prg_\sigma$ be an arbitrary closed PCF term and that $y R_\sigma P$. 
+Now, for each $k \in K$, we have $y_k \sqsubseteq y$ and by Lemma 4.2(1), we get $y_k R_\sigma P$ for all $k \in K$. Using ($\star$), we have $x_k R_\sigma P$ for each $k \in K$. 
+
+By Lemma 4.2(2), $R_\sigma P$ is closed under directed suprema and $\{ x_k | k \in K \}$ is a directed subset of $D_\sigma$ whose elements are all in $R_\sigma P$. So, their suprema $x$ must also be in $R_\sigma P$, meaning that $x R_\sigma P$.
