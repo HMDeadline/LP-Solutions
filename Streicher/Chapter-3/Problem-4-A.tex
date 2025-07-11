@@ -1,0 +1,8 @@
+For the first argument, fix $f \in [D \to D]$ and let $\mathcal{F} \subseteq [[D \to D] \to D]$ be a directed set.
+We know that $(\bigsqcup \mathcal{F})(f) = \bigsqcup \{ F(f) | F \in \mathcal{F} \}$.
+Thus, $$  \underbrace{f((\bigsqcup \mathcal{F})(f))}_{\Psi (\bigsqcup \mathcal{F} ,f)} = f(\bigsqcup \{ F(f) | F \in \mathcal{F} \}) = \bigsqcup \{ f(F(f)) | F \in \mathcal{F} \}  $$
+
+For the second argument, fix $F \in [[D \to D] \to D]$ and let $X \subseteq [D \to D]$ be a directed set. We know that $F(\bigsqcup X) = \bigsqcup \{ F(f) | f \in X \}$. Thus,
+$$  f(F(\bigsqcup X)) = f(\bigsqcup \{F(f) | f \in X\}) = \bigsqcup \{f(F(f)) | f \in X \}  $$
+
+Hence, $\Psi$ is continuous in both arguments and by Lemma 3.4, it is jointly continuous.

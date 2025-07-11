@@ -1,0 +1,24 @@
+    We prove this by induction on the structure of the derivation of $M \Downarrow V$.
+
+    \textbf{Base cases.}
+    \begin{itemize}
+        \item If $M \equiv x$, then if $\Gamma \vdash x:\sigma$, then the goal is trivial since $x \Downarrow x$.
+        
+        Same goes for the other base cases ($\lambda x:\sigma.M$, $\underline{0}$).
+    \end{itemize}  
+    \textbf{Inductive Steps.}
+    \begin{itemize}
+        \item If $M \equiv succ(M)$, then the only evaluation rule is $\frac{M \Downarrow \underline{n}}{succ(M) \Downarrow \underline{n+1}}$; so $V \equiv \underline{n+1}$.
+              We are given $\Gamma \vdash succ(M):\sigma$ and by the typing rule for $succ$, we have $\Gamma \vdash M:nat$.
+
+              Now, from $M \Downarrow \underline{n}$ and $\Gamma \vdash M:nat$, by IH, $\Gamma \vdash \underline{n}:nat$; thus, by the typing rule for $succ$, 
+              we have $\Gamma \vdash \underline{n+1}:nat$.
+
+        \item If $M \equiv M(N)$, the evaluation rule is $\frac{M \Downarrow \lambda x:\sigma.E \;\; E[N/x] \Downarrow V}{M(N) \Downarrow V}$.
+              We are given $\Gamma \vdash M(N):\sigma$ and by the typing rule for application, we have $\Gamma \vdash M:\sigma \to \tau$ and $\Gamma \vdash N:\sigma$.
+              Now, we have $M \Downarrow \lambda x:\sigma.E$ and $\Gamma \vdash M:\sigma \to \tau$ and by IH, we have $\Gamma \vdash \lambda x:\sigma.E:\sigma \to \tau$.
+              The typing rule for abstraction is $\frac{\Gamma, x:\sigma \vdash E:\tau}{\Gamma \vdash \lambda x:\sigma.E:\sigma \to \tau}$, so we have $\Gamma, x:\sigma \vdash E:\tau$.
+              Using the substitution lemma, we can conclude that $\Gamma \vdash E[N/x]:\tau$. Now, from $E[N/x] \Downarrow V$ and $\Gamma \vdash E[N/x]:\tau$, by IH, we have $\Gamma \vdash V:\tau$.
+
+        \item Same goes for the other cases (both cases of $pred$, $Y_\sigma$, and both cases of $ifz$).
+    \end{itemize}
