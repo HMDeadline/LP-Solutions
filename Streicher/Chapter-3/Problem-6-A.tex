@@ -1,0 +1,3 @@
+$$ \forall \vec{d} \in \llbracket \Gamma \rrbracket, d' \in D_\sigma, \llbracket \Gamma \vdash \lambda x : \sigma . M(x) \rrbracket (\vec{d})(d') = \llbracket \Gamma , x:\sigma \vdash M(x) \rrbracket (\vec{d}, d') $$
+$$ = ev(\llbracket \Gamma , x:\sigma \vdash M \rrbracket (\vec{d}, d'), \underbrace{\llbracket \Gamma , x:\sigma \vdash x \rrbracket(\vec{d}, d')}_{\pi_x(\vec{d}, d') = d'}) =^\star \llbracket \Gamma \vdash M \rrbracket (\vec{d})(d')$$
+For the last equation ($\star$), because $x \notin Var(\Gamma)$ and $\Gamma \vdash M$, we have $$\llbracket \Gamma , x:\sigma \vdash M \rrbracket (\vec{d},d') = \llbracket \Gamma \vdash M \rrbracket (\vec{d})$$.

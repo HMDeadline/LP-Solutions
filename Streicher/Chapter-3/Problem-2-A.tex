@@ -1,0 +1,16 @@
+Let $D = \prod_{i \in I} A_i = \{ f : I \to \bigcup_{i \in I} A_i | \forall i \in I, f(i) \in A_i \}$. We need to show that $(D, \sqsubseteq_D)$ is a poset, and every directed subset of $D$ has a least upper bound. Note that the order $\sqsubseteq_D$ is defined as follows:
+
+$$ (d_i)_{i \in I} \sqsubseteq_D (d'_i)_{i \in I} \quad iff \quad \forall i \in I, d(i) \sqsubseteq_{A_i} d'(i) $$
+
+We now show that $(D, \sqsubseteq_D)$ forms a poset. 
+\begin{itemize}
+    \item \textbf{Reflexivity:} For any $(d_i)_{i \in I} \in D, d_i \sqsubseteq_{A_i} d_i, \forall i \in I$ since each $A_i$ is a poset. Thus $(d_i)_{i \in I} \sqsubseteq_D (d_i)_{i \in I}$
+    \item \textbf{Transitivity:} Assume $(d_i)_{i \in I} \sqsubseteq_D (d_i')_{i \in I}$ and $(d_i')_{i \in I} \sqsubseteq_D (d_i'')_{i \in I}$. And by each $A_i$ being transitive, it follows immediately that $d_i \sqsubseteq_{A_i} d_i''$ for all $i \in I$. Therefore, $(d_i)_{i \in I} \sqsubseteq_D (d_i'')_{i \in I}$.
+    \item \textbf{Antisymmetry:} Similar to the previous case, it follows immediately from the fact that each $A_i$ is antisymmetric.
+\end{itemize}
+
+Now, suppose that $X \subseteq D = \prod_{i \in I} A_i$ is a directed subset. define 
+    $X_i = \{ \pi_i(x) | x \in X \} $, that is, the projection of $X$ to $A_i$. $X_i$ is directed since $X$ is directed.
+    Moreover, $X_i$ has a least upper bound $ \bigsqcup X_i \in A_i $. Define $z \in D$
+    with $z_i = \bigsqcup X_i$ for each $i \in I$. By construction, it is obvious that $z$ is the least upper bound of $X$ in $D$.
+    Thus, $D$ is a predomain.
